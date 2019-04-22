@@ -68,7 +68,7 @@ if(isset($_POST["Submit"])){
           <a href="MyProfile.php" class="nav-link"> <i class="fas fa-user text-success"></i> My Profile</a>
         </li>
         <li class="nav-item">
-          <a href="Dashboard.php" class="nav-link">Dashboard</a>
+          <a href="index.php" class="nav-link">Dashboard</a>
         </li>
         <li class="nav-item">
           <a href="Posts.php" class="nav-link">Posts</a>
