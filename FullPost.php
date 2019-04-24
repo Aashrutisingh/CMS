@@ -72,23 +72,7 @@ if(isset($_POST["Submit"])){
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarcollapseCMS">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a href="Blog.php?page=1" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a href="Blog.php?page=1" class="nav-link">Blog</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Contact Us</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Features</a>
-        </li>
-      </ul>
+     
       <ul class="navbar-nav ml-auto">
         <form class="form-inline d-none d-sm-block" action="Blog.php">
           <div class="form-group">
@@ -107,8 +91,7 @@ if(isset($_POST["Submit"])){
       <div class="row mt-4">
         <!-- Main Area Start-->
         <div class="col-sm-8 ">
-          <h1>The Complete Responsive CMS Blog</h1>
-          <h1 class="lead">The Complete blog by using PHP </h1>
+          
           <?php
            echo ErrorMessage();
            echo SuccessMessage();
@@ -232,15 +215,7 @@ if(isset($_POST["Submit"])){
 
         <!-- Side Area Start -->
         <div class="col-sm-4">
-          <div class="card mt-4">
-            <div class="card-body">
-              <img src="images/startblog.png" class="d-block img-fluid mb-3" alt="">
-              <div class="text-center">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </div>
-            </div>
-          </div>
-          <br>
+          
           <div class="card">
             <div class="card-header bg-dark text-light">
               <h2 class="lead">Sign Up !</h2>
