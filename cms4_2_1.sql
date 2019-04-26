@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 22, 2019 at 05:30 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 7.3.3
+-- Host: 127.0.0.1:3306
+-- Generation Time: Apr 25, 2019 at 07:20 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,8 +28,9 @@ SET time_zone = "+00:00";
 -- Table structure for table `admins`
 --
 
-CREATE TABLE `admins` (
-  `id` int(10) NOT NULL,
+DROP TABLE IF EXISTS `admins`;
+CREATE TABLE IF NOT EXISTS `admins` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `datetime` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(60) NOT NULL,
@@ -37,8 +38,9 @@ CREATE TABLE `admins` (
   `aheadline` varchar(30) NOT NULL,
   `abio` varchar(500) NOT NULL,
   `aimage` varchar(60) NOT NULL DEFAULT 'avatar.png',
-  `addedby` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `addedby` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admins`
@@ -59,12 +61,14 @@ INSERT INTO `admins` (`id`, `datetime`, `username`, `password`, `aname`, `aheadl
 -- Table structure for table `category`
 --
 
-CREATE TABLE `category` (
-  `id` int(10) NOT NULL,
+DROP TABLE IF EXISTS `category`;
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `title` varchar(50) NOT NULL,
   `author` varchar(50) NOT NULL,
-  `datetime` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `datetime` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
@@ -86,24 +90,19 @@ INSERT INTO `category` (`id`, `title`, `author`, `datetime`) VALUES
 -- Table structure for table `comments`
 --
 
-CREATE TABLE `comments` (
-  `id` int(10) NOT NULL,
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `datetime` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(60) NOT NULL,
   `comment` varchar(500) NOT NULL,
   `approvedby` varchar(50) NOT NULL,
   `status` varchar(3) NOT NULL,
-  `post_id` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `datetime`, `name`, `email`, `comment`, `approvedby`, `status`, `post_id`) VALUES
-(9, 'January-26-2019 10:47:55', 'Nick', 'nick@gmail.com', 'i support this initiative', 'aarush', 'ON', 51),
-(10, 'January-26-2019 10:48:28', 'Danny', 'Dann@gmail.com', 'This is very inspiring', 'aarush', 'ON', 51);
+  `post_id` int(10) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `post_id` (`post_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -111,89 +110,31 @@ INSERT INTO `comments` (`id`, `datetime`, `name`, `email`, `comment`, `approvedb
 -- Table structure for table `posts`
 --
 
-CREATE TABLE `posts` (
-  `id` int(10) NOT NULL,
+DROP TABLE IF EXISTS `posts`;
+CREATE TABLE IF NOT EXISTS `posts` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `datetime` varchar(50) NOT NULL,
   `title` varchar(300) NOT NULL,
   `category` varchar(50) NOT NULL,
   `author` varchar(50) NOT NULL,
   `image` varchar(50) NOT NULL,
-  `post` varchar(10000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `post` varchar(10000) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`id`, `datetime`, `title`, `category`, `author`, `image`, `post`) VALUES
-(16, 'January-15-2019 12:20:29', 'A Spontaneous Weekend Getaway…', 'Weekend Break Travel', 'Aashruti', '3.jpg', 'This weekend I had no plans whatsoever… Actually scratch that! I ‘kinda’ had plans but most of it involved challenging myself to eat my body’s weight in free samples at food markets in London and lots of catching up on Netflix  – both of which I am very skilled at but these plans changed when I got asked by Time Out London and Booking.com if I would a spontaneous weekend away. This, was a very easy yes! Especially so as Time Out is our go to place when it comes to looking for cool and different events in London. I can not tell you the amount of times Georgia, Lloyd, Chris and I (along with lots of our other friends) have decided on a whim to go out in London and whizzed through Time Out London’s impressively curated list of everything cool that’s going on in London. I’m pretty sure if you ask any Londoner they’ll probably tell you how important Time Out is to your social life in London – especially when you’ve not made enough plans in advance.\r\n\r\nAnyway, I digress – Time Out was already synonymous with spontaneous fun evenings in London for me and my friends so my first though as soon as I was asked was “Yeah…Why not?! Let’s do this!“.'),
-(17, 'January-15-2019 12:20:47', '11 Reasons Why Singapore Zoo Is One Of The Best Zoos In The World', 'Vacation', 'Aulick', 'agi-banner-ai1.jpg', 'Singapore has 3 main cultures living together in harmony, a booming economy, low rates of crime, minimal traffic jams, and a peaceful feel that’s unique to this island nation. Even if your experience is limited to a stop at Changi airport, you can’t help but notice there’s something extraordinary about Singapore. \r\n\r\nI’ve been to dozens of zoos around the world, and to be honest, it now takes a lot to impress me. It’s fairly rare for me to carve precious time out of my itinerary to visit a zoo, but I made an exception this time.\r\n\r\nI had a feeling that Singapore Zoo would be pretty special so got discounted tickets at Voyagin and spent a day exploring Singapore Zoo and River Safari.\r\n\r\nLike the rest of Singapore, everything at the zoo was done a little differently and very efficiently. I found 11 ways that Singapore Zoo stands out as one of the best zoos in the world. '),
-(18, 'January-15-2019 12:21:14', 'WHAT KIND OF BACKPACKER ARE YOU?', 'Research Travel', 'Aulick', '_102968357_diverse_politics.jpg', ' You always hear about the distinction between tourists and backpackers, but even among backpackers, we love to group each other into categories by who is the “better” traveler. Check into any hostel, and you will find a variety of travelers wearing their distinctive tribal gear and people going “Yeah, that guy over there? Definitely the partier.”\r\n\r\nSo who are the backpackers? What kind of types have I identified in the hostel jungle? After years of research, many!'),
 (19, 'January-15-2019 12:22:54', 'Tips You Need to Know Before Planning a Group Trip', 'Group Tour', 'Meghana', 'safe_image.jpg', 'Group trips can be the best or worst type of trip ever. They can become one of the most amazing times of our lives, where we bond with our travel companions and reminisce about the group trip for years to come. Others, well… not so much.\r\n\r\nTraveling as a group can mean inside jokes, great stories, learning more about how to travel, and plenty of laughs.\r\n\r\nUnfortunately, it usually also involves more precise planning and a lot of organization, which can lead to tension, indecisiveness and bad planning.\r\n\r\nWe love group travel, and so we want to help you plan the best group trip possible and make it one of the great ones!\r\n\r\nWhether it’s a school break trip, a party vacation with friends, a group hiking trip, or attending a festival, there are a lot of things to consider when you’re planning a group trip.'),
 (20, 'January-15-2019 12:23:09', 'A Road Trip to Leh – The Luxury Way', 'The RoadTrip', 'Deekshita', 'fit.jpg', 'Traversing through the challenging terrain leading up to Leh is every road-trip enthusiast’s travel dream. The virgin locales, rocky mountains, breathtaking views, tranquil gompas, bustling bazaars and delectable food scene – what’s not to love! Drop the idea of roughing it out like a conventional road-trip because this once-in-a-lifetime experience is best enjoyed in the lap of luxury. This exhaustive guide will help you explore Leh the opulent way incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut '),
 (21, 'January-15-2019 12:23:38', 'MY PICK OF THE 5 BEST PLACES FOR YOGA TEACHER TRAINING IN RISHIKESH, INDIA', 'Volunteer Travel', 'ankita', 'safe_image.jpg', 'oga originated from India and Rishikesh, situated on the holy Ganges river at the foothills of the magical Himalayan mountains, is one of the most serene and spiritual towns in India. Ever since The Beatles visited the Maharishi Mahesh Yogi Ashram here in the late 1960s Rishikesh has been famous for being the ‘Yoga Capital of the World’ so it’s not surprising that there are many amazing ashrams, yoga retreats and places to do yoga teacher training in Rishikesh.\r\n\r\nRishikesh has a very special energy, soul stirring scenery and so many temples, ashrams, workshops and healing therapies here which make it a magnet for yogis and spiritual seekers so it’s easy to meet like minded people. There’s an eclectic mix of Indian and Western culture, with delicious local restaurants next to healthy Western restaurants serving nourishing vegan and vegetarian food, many with fabulous views over the river and mountains. As it’s a holy place no meat, eggs or alcohol are served in the restaurants here.\r\n\r\nThere’s also no shortage of places to shop in Rishikesh either, with affordable spiritual books, trinkets, jewelry, handbags, and hand-sewn dresses and skirts to choose from. You can also go white water rafting down the Ganges, visit the abandoned Beatles ashram and take part in the nightly Ganga Aarti along the River Ganga in Ram Jhula'),
-(22, 'January-15-2019 12:24:05', 'Post 7', 'Science', 'Zoe333', 'HTML5 CSS3.jpg', ''),
 (23, 'January-15-2019 12:24:52', 'OUR EXPERIENCE WORKING AS DIGITAL NOMADS AND LIVING IN A MOTORHOME', 'Long Term Slow Travel', 'Deekshita', 'children-running-t.jpg', 'Interested in trying the RV life without the commitment of purchasing an RV?\r\n\r\nThat makes me so happy!\r\n\r\nLiving in a motorhome while traveling the country is a whole new world – I’d hate for you to purchase one without seeing if the lifestyle is for you first!\r\n\r\nWhich is why I’m so excited to tell you that you don’t have to buy an RV to be a part-time digital nomad.\r\n\r\nSites like Outdoorsy allow you to rent RVs for as little as $50 per night. Here are our recommendations of which sites to use.\r\n\r\nRenting an RV is a great way to experience the lifestyle before you commit $10,000+ to buy your own RV. Plus, you can rent different styles to see which ones you like. And you can rent a camper for a month or more, and doing so lets you truly experience what it would be like to live in an RV (a week just isn’t enough time in my opinion).'),
-(25, 'January-15-2019 12:26:22', 'Tower Bridge in London, a Triumph of Victorian Engineering, Turns 125', 'Business Travel', 'Aashruti', 'gas.jpg', '             Tower Bridge, which crosses the Thames close to the Tower of London, is celebrating its 125th anniversary this year. In addition to being a beloved icon of the city, it is one of the most recognizable structures in the world.\r\n\r\nIt was opened by the Prince of Wales, who was also the future King Edward VII, and his wife, the Princess of Wales.\r\n\r\nBuilt between 1886 and 1894, the bridge was designed so that hydraulic steam engines would raise and lower the two bascules or giant roadways to allow ships to pass through. The elevated walkway atop the bridge would allow pedestrians to cross when the bascules were open.\r\n\r\nThe bridge was designed by the architect, Sir Horace Jones, and the engineer, Sir John Wolfe Barry, in this manner because a standard fixed bridge at street level would have cut off access by ships to port facilities in the Pool of London, which is between London Bridge and the Tower of London. The bridge’s designers concealed the bascule pivots and operating machinery in the two towers, which are clad in Cornish granite and Portland stone to match the nearby Tower of London.                 '),
-(38, 'January-26-2019 07:49:42', 'France offers citizenship to Malian immigrant', 'News', 'Tom', 'download.jpg', '                              '),
-(51, 'January-26-2019 07:51:50', 'Education for Syrian Refugee Children', 'News', 'Zoe333', 'education.jpg', '                Symbolic Syrian Woman Alkuman-Made is asking for Free Education to all under-privileges . This will definitely a milestone in the middle eastern region.               ');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `admins`
---
-ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `category`
---
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `comments`
---
-ALTER TABLE `comments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `post_id` (`post_id`);
-
---
--- Indexes for table `posts`
---
-ALTER TABLE `posts`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `admins`
---
-ALTER TABLE `admins`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `category`
---
-ALTER TABLE `category`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `comments`
---
-ALTER TABLE `comments`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `posts`
---
-ALTER TABLE `posts`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+(52, 'April-24-2019 12:46:50', 'Urban Travel Blogâ€™s Affordable City Breaks', 'Weekend Break Travel', 'Aulick ', 'budapest-cheap-city-break.jpg', '                Budget Budapest\r\nRecently calculated to be Europeâ€™s cheapest getaway by the Post Office, weâ€™d have to dispute that but nonetheless this is a city that should be near the top of any hitlist, budget or otherwise, of places to visit. With its castle sitting on top of Buda, the mighty Danube running through it, and the palaces of Pest â€“ relics of the once mighty Austro-Hungarian Empire â€“ this capital deals with grandeur on an epic scale, which together with the famously hearty cuisine and great nightlife options make it a winning option. Prices wise the first place you can save a few pennies is on flights. As well as the regular carriers, Budapest is the home base of the Hungarian airline Wizzair meaning there are a large number of cheap connections around Europe. For accommodation check the â€œPillow Talkâ€ section of our Long Weekend guide, where our insider expert recommends several great hostels. One expense you canâ€™t skimp on is a trip to the baths (check our extensive guide here!) and whilst the best of the bunch â€“ Szechenyi â€“ costs 4500 forints for a day ticket with locker (around â‚¬15) that will feel like money well spent, we promise, when you emerge several hours later. Food and drink remains very reasonable almost everywhere, but take our advice and spend most of your time drinking in the amazing ruin pubs. One final word of advice, avoid heading over during Sziget festival week in August as room prices can doubleâ€¦. unless of course youâ€™re heading over for Sziget festivalâ€¦ in which case have fun you lucky folks!\r\n\r\n              '),
+(53, 'April-24-2019 12:54:02', 'Historical Places in Istanbul', 'Weekend Break Travel', 'Aulick ', 'Hagia-Sophia-1.jpg', '                The Best Historical Places in Istanbul, Turkey\r\nThe bustling metropolis of Istanbul in  Turkey is a vibrant city with everything going for it. Not only is it a hub of business, finance, real estate and cultural trends but also home to many historic landmarks. From the days of Byzantine rule to the era of the Ottomans, most of the historical places in Istanbul are open to the public for viewing. Including palaces, mosques, churches, castle and districts, they can be viewed in a few days or a week will take you into the heart and soul of what was old Constantinople.\r\n\r\nGlory of the Hagia Sophia:\r\nAs a former church, mosque, and now museum, this structural building represents the crossover that happened to Constantinople from Byzantine rule to Ottoman grandeur. As one of Istanbulâ€™s great glories built between 532 and 537AD, originally by the emperor Justinian, intricate frescoes adorn the ceiling. Representing scenes from the Bible and prominent figures of the Byzantine Empire, they sit next to large circular plagues pinned to the wall that highlight Islamic calligraphy art. The galleries of the upper level are where the best view of the interior of the iconic building is to be seen.\r\n\r\nHistorical Blue Mosque:\r\nSitting across from the Hagia Sophia, the majestic Blue Mosque dating from 1616 is one of the best historical places in Istanbul. Foreigners can glimpse into the life of secular Muslims in Turkey because the mosque still operates daily for prayers. Also called Sultanahmet cami, entrance to see the blue stained glass windows of the interior is free or donations are gratefully accepted. With its 260 windows and unique 6 minarets, the Blue Mosque is the most famous in Turkey.              '),
+(54, 'April-24-2019 13:05:13', 'WHY ROAD TRIPS ARE A GOOD IDEA FOR FAMILY TRAVEL', 'The Road Trip', 'Aulick ', 'familyroadtrip-02.jpg', 'Whether you drive 100 miles or 2,000 miles, youâ€™re in complete control over where you go and how you get there. Being in a vehicle allows you to see the countryside and visit places you would not ordinarily visit. Adventure lies in the most unexpected places.\r\n\r\nWhile on a road trip through the Canadian Rockies this summer, we had the freedom to visit whatever attraction we desired. As we drove down the Icefields Parkway from Jasper to Banff (arguably the most beautiful drive in the world), we constantly found ourselves pulling off the highway to view waterfalls, canyons, glacial lakes and Rocky Mountain viewpoints. We would never have been able to stay at this incredible mountain lodge in Banff National Park if we were traveling by bus or train.\r\n\r\nThe great thing about road trips is that every day is different. Tomorrow brings new landscapes, new towns, new attractions, and new hotel rooms. This is exciting for little ones and parents, because every day becomes a new adventure. It also means that you can change your itinerary at a momentâ€™s notice if you find something better to do.'),
+(55, 'April-24-2019 13:09:38', 'Traveling With Wireless Earbudsâ€“Help a Reader!', 'Business Travel', 'Aulick ', 'earbuds.jpg', 'Hi Road Warriorette! I am SO OVER traveling with my wired iPhone earbuds. If Iâ€™m trying to talk or listen to a call while doing anything else, like walk through the airport or pay for coffee, I get all tangled up. The earbuds get jerked out of my ear several times every trip and Iâ€™m just so tired of it. Do you have any tips for switching to a wireless or bluetooth pair? Any suggestions for what to buy? Iâ€™m scared about them falling out, or that Iâ€™ll lose one, but Iâ€™ve got to at least try something else. Thank you!\r\n\r\nReader S, I can totally relate. I have gotten to that point myself, and actually received a pair of bluetooth earbuds for Christmas. Unfortunately I canâ€™t really recommend mine, because while I love them for listening to music and podcasts I donâ€™t like them for conference callsâ€“people say I sound muffled when I speak. (Although if you plan to use them only for listening, they cancel outside sound really well and I love using them for walks. The ones I got are sold out but these seem to be the closest version.)\r\n\r\nBecause this is so new to me I donâ€™t have a ton of best practices of my own yet. I try to remember to put them back in their little charging case anytime I take them off, because Iâ€™m paranoid theyâ€™ll get lost in my enormous purse. Every night I plug the case in to charge when I plug in my phone and other devices. They feel very secure so I am not afraid of one just falling out. But I still bring my regular, wired headphones for conference calls (and yet another pair just in case my plane has built-in in flight entertainment).\r\n\r\nMy sister loves her Apple AirPods but Iâ€™m having a hard time swallowing the $130 price tag.');
 
 --
 -- Constraints for dumped tables
